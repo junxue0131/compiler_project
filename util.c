@@ -24,6 +24,7 @@ void printToken( TokenType token, const char* tokenString )
     case WRITE:
     case INT:
     case REAL:
+    case CHAR:
       fprintf(listing,
          "reserved word: %s\n",tokenString);
       break;
@@ -41,6 +42,14 @@ void printToken( TokenType token, const char* tokenString )
     case NUM:
       fprintf(listing,
           "NUM, val= %s\n",tokenString);
+      break;
+    case INTNUM:
+      fprintf(listing,
+          "INTNUM, val= %s\n",tokenString);
+      break;
+    case REALNUM:
+      fprintf(listing,
+          "REALNUM, val= %s\n",tokenString);
       break;
     case ID:
       fprintf(listing,
@@ -181,6 +190,12 @@ void printTree( TreeNode * tree )
         case IdK:
           fprintf(listing,"Id: %s\n",tree->attr.name);
           break;
+        case ConstIntK:
+          fprintf(listing,"Int: %d\n",(int)tree->attr.val);
+          break;
+        case ConstRealK:
+          fprintf(listing,"Real: %f\n",tree->attr.val);
+          break;
         default:
           fprintf(listing,"Unknown ExpNode kind\n");
           break;
@@ -193,6 +208,9 @@ void printTree( TreeNode * tree )
           break;
         case RealK:
           fprintf(listing,"Real: %s\n",tree->attr.name);
+          break;
+        case CharK:
+          fprintf(listing,"Char: %s\n",tree->attr.name);
           break;
         default:
           fprintf(listing,"Unknown DecNode kind\n");

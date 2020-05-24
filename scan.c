@@ -25,6 +25,7 @@ static char lineBuf[BUFLEN]; /* holds the current line */
 static int linepos = 0; /* current position in LineBuf */
 static int bufsize = 0; /* current size of buffer string */
 static int EOF_flag = FALSE; /* corrects ungetNextChar behavior on EOF */
+int REALFLAG = FALSE; /* mark the real number */
 
 /* getNextChar fetches the next non-blank character
    from lineBuf, reading in a new line if lineBuf is
@@ -58,7 +59,7 @@ static struct
     } reservedWords[MAXRESERVED]
    = {{"if",IF},{"then",THEN},{"else",ELSE},{"end",END},
       {"repeat",REPEAT},{"until",UNTIL},{"read",READ},
-      {"write",WRITE},{"int",INT},{"real",REAL}};
+      {"write",WRITE},{"int",INT},{"real",REAL},{"char",CHAR}};
 
 /* lookup an identifier to see if it is a reserved word */
 /* uses linear search */
@@ -117,9 +118,17 @@ TokenType getToken(void)
                break;
              case '+':
                currentToken = PLUS;
+               if (isdigit(getNextChar())) {
+                 state = INNUM;
+                 ungetNextChar();
+               }
                break;
              case '-':
                currentToken = MINUS;
+               if (isdigit(getNextChar())) {
+                 state = INNUM;
+                 ungetNextChar();
+               }
                break;
              case '*':
                currentToken = TIMES;
@@ -163,11 +172,23 @@ TokenType getToken(void)
          break;
        case INNUM:
          if (!isdigit(c))
-         { /* backup in the input */
+         { 
+           /*find real number*/
+           if (c == '.') 
+           {
+            REALFLAG = TRUE;
+            break;
+           }
+           /* backup in the input */
            ungetNextChar();
            save = FALSE;
            state = DONE;
-           currentToken = NUM;
+           if (REALFLAG == TRUE) {
+              currentToken = REALNUM;
+              REALFLAG = FALSE;
+           }else {
+              currentToken = INTNUM;
+           }
          }
          break;
        case INID:
@@ -200,4 +221,3 @@ TokenType getToken(void)
    }
    return currentToken;
 } /* end getToken */
-

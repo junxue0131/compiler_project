@@ -41,7 +41,7 @@ clean:
 	rm -f tiny tm *.o
 
 tm: tm.c
-	$(CC) $(CFLAGS) -etm tm.c
+	$(CC) $(CFLAGS) -etm tm.c -o tm 
 
 tiny: tiny
 

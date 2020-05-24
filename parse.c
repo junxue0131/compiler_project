@@ -65,6 +65,7 @@ TreeNode * program(void)
       }
     }
   }
+  /*return s->child[1];*/
   return s;
 }
 
@@ -83,7 +84,6 @@ TreeNode * declaration_list(void)
       if (t==NULL) t = p = q;
       else
       {
-        printf("hhh");
         p->sibling = q;
         p = q;
       }
@@ -103,10 +103,16 @@ TreeNode * declaration(void)
       match(ID);
       match(SEMI);
       break;
-
     case INT :
       t = newDeclarationNode(IntK);
       match(INT);
+      if ((t!=NULL) && (token==ID)) t->attr.name = copyString(tokenString);
+      match(ID);
+      match(SEMI);
+      break;
+    case CHAR :
+      t = newDeclarationNode(CharK);
+      match(CHAR);
       if ((t!=NULL) && (token==ID)) t->attr.name = copyString(tokenString);
       match(ID);
       match(SEMI);
@@ -248,11 +254,17 @@ TreeNode * term(void)
 TreeNode * factor(void)
 { TreeNode * t = NULL;
   switch (token) {
-    case NUM :
-      t = newExpNode(ConstK);
-      if ((t!=NULL) && (token==NUM))
+    case INTNUM :
+      t = newExpNode(ConstIntK);
+      if ((t!=NULL) && (token==INTNUM))
         t->attr.val = atoi(tokenString);
-      match(NUM);
+      match(INTNUM);
+      break;
+    case REALNUM :
+      t = newExpNode(ConstRealK);
+      if ((t!=NULL) && (token==REALNUM))
+        t->attr.val = atof(tokenString);
+      match(REALNUM);
       break;
     case ID :
       t = newExpNode(IdK);
