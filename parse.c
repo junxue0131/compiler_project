@@ -98,6 +98,7 @@ TreeNode * declaration(void)
   switch (token) {   
     case REAL:
       t = newDeclarationNode(RealK);
+      t->type = Reall;
       match(REAL);
       if ((t!=NULL) && (token==ID)) t->attr.name = copyString(tokenString);
       match(ID);
@@ -105,6 +106,7 @@ TreeNode * declaration(void)
       break;
     case INT :
       t = newDeclarationNode(IntK);
+      t->type = Integer;
       match(INT);
       if ((t!=NULL) && (token==ID)) t->attr.name = copyString(tokenString);
       match(ID);
@@ -112,6 +114,7 @@ TreeNode * declaration(void)
       break;
     case CHAR :
       t = newDeclarationNode(CharK);
+      t->type = Integer;
       match(CHAR);
       if ((t!=NULL) && (token==ID)) t->attr.name = copyString(tokenString);
       match(ID);
@@ -258,18 +261,21 @@ TreeNode * factor(void)
       t = newExpNode(ConstIntK);
       if ((t!=NULL) && (token==INTNUM))
         t->attr.val = atoi(tokenString);
+        t->type = Integer;
       match(INTNUM);
       break;
     case REALNUM :
       t = newExpNode(ConstRealK);
       if ((t!=NULL) && (token==REALNUM))
         t->attr.val = atof(tokenString);
+        t->type = Reall;
       match(REALNUM);
       break;
     case ID :
       t = newExpNode(IdK);
       if ((t!=NULL) && (token==ID))
         t->attr.name = copyString(tokenString);
+        t->type = Integer;
       match(ID);
       break;
     case LPAREN :
