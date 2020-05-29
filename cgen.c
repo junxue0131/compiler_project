@@ -165,6 +165,11 @@ static void genExp( TreeNode * tree)
   }
 } /* genExp */
 
+static void genDec( TreeNode * tree)
+{
+  
+}
+
 /* Procedure cGen recursively generates code by
  * tree traversal
  */
@@ -177,9 +182,14 @@ static void cGen( TreeNode * tree)
       case ExpK:
         genExp(tree);
         break;
+      case DecK:
+        genDec(tree);
+        break;
+      case PromK:
       default:
         break;
     }
+    printf("treenode now:%s\n", tree->nodekind);
     cGen(tree->sibling);
   }
 }
@@ -205,6 +215,7 @@ void codeGen(TreeNode * syntaxTree, char * codefile)
    emitRM("ST",ac,0,ac,"clear location 0");
    emitComment("End of standard prelude.");
    /* generate code for TINY program */
+printf("begin cGen");
    cGen(syntaxTree);
    /* finish */
    emitComment("End of execution.");

@@ -78,6 +78,40 @@ static void insertNode( TreeNode * t)
           break;
       }
       break;
+    case DecK:
+      switch (t->kind.dec)
+      {
+	case IntK:
+	  if (st_lookup(t->attr.name) == -1)
+          /* not yet in table, so treat as new definition */
+            st_insert(t->attr.name,t->lineno,location++);
+          else
+          /* already in table, so ignore location, 
+             add line number of use only */ 
+            st_insert(t->attr.name,t->lineno,0);
+	  break;	
+	case RealK:
+	  if (st_lookup(t->attr.name) == -1)
+          /* not yet in table, so treat as new definition */
+            st_insert(t->attr.name,t->lineno,location++);
+          else
+          /* already in table, so ignore location, 
+             add line number of use only */ 
+            st_insert(t->attr.name,t->lineno,0);
+	  break;    	
+	case CharK:
+	  if (st_lookup(t->attr.name) == -1)
+          /* not yet in table, so treat as new definition */
+            st_insert(t->attr.name,t->lineno,location++);
+          else
+          /* already in table, so ignore location, 
+             add line number of use only */ 
+            st_insert(t->attr.name,t->lineno,0);
+	  break;
+	default:
+	  break;
+      }
+      break;
     default:
       break;
   }
