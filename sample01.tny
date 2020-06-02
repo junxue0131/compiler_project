@@ -1,6 +1,7 @@
 int x;
 int fact;
 read x;
+write y;
 if 0 < x then
   fact := 1;
   repeat
