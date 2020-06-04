@@ -3,6 +3,7 @@ int x;
 char c;
 int fact;
 read x;
+c := 'a';
 if 0 < x then
   fact := +1;
   repeat

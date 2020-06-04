@@ -51,6 +51,10 @@ void printToken( TokenType token, const char* tokenString )
       fprintf(listing,
           "REALNUM, val= %s\n",tokenString);
       break;
+    case CHARNUM:
+      fprintf(listing,
+          "CHARNUM, val= %s\n",tokenString);
+      break;
     case ID:
       fprintf(listing,
           "ID, name= %s\n",tokenString);
@@ -195,6 +199,9 @@ void printTree( TreeNode * tree )
           break;
         case ConstRealK:
           fprintf(listing,"Real: %f\n",tree->attr.val);
+          break;
+        case ConstCharK:
+          fprintf(listing,"Char: %c\n",(char)tree->attr.val);
           break;
         default:
           fprintf(listing,"Unknown ExpNode kind\n");

@@ -271,6 +271,13 @@ TreeNode * factor(void)
         t->type = Reall;
       match(REALNUM);
       break;
+    case CHARNUM :
+      t = newExpNode(ConstCharK);
+      if ((t!=NULL) && (token==CHARNUM))
+        t->attr.val = (double)tokenString[1];
+        t->type = Charac;
+      match(CHARNUM);
+      break;
     case ID :
       t = newExpNode(IdK);
       if ((t!=NULL) && (token==ID))

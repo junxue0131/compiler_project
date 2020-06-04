@@ -31,7 +31,7 @@ typedef enum
     /* reserved words */
     IF,THEN,ELSE,END,REPEAT,UNTIL,READ,WRITE,
     /* multicharacter tokens */
-    ID,NUM,INTNUM,REALNUM,
+    ID,NUM,INTNUM,REALNUM,CHARNUM,
     /* special symbols */
     ASSIGN,EQ,LT,PLUS,MINUS,TIMES,OVER,LPAREN,RPAREN,SEMI,
     /* type-specifier */
@@ -50,11 +50,11 @@ extern int lineno; /* source line number for listing */
 
 typedef enum {StmtK,ExpK,DecK,PromK} NodeKind;
 typedef enum {IfK,RepeatK,AssignK,ReadK,WriteK} StmtKind;
-typedef enum {OpK,ConstK,ConstIntK,ConstRealK,IdK} ExpKind;
+typedef enum {OpK,ConstK,ConstIntK,ConstRealK,ConstCharK,IdK} ExpKind;
 typedef enum {IntK, RealK, CharK} DecKind;
 
 /* ExpType is used for type checking */
-typedef enum {Void,Integer,Reall,Boolean} ExpType;
+typedef enum {Void,Integer,Reall,Charac,Boolean} ExpType;
 
 #define MAXCHILDREN 3
 
