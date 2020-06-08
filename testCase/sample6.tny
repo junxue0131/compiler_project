@@ -1,0 +1,10 @@
+{赋值类型错误样例3}
+int x;
+real y;
+char c;
+read c;
+x := 3;
+y := 2.3;
+c := 'h';
+c := 4 + x;{不能给char赋值int或real类型}
+write x

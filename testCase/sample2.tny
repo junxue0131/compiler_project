@@ -1,0 +1,18 @@
+{使用未定义变量错误样例}
+int x;
+int fact;
+char c;
+read g; {g not define}
+write 0.2;
+write c;
+if 0 < x then
+  fact := 1;
+  repeat
+    fact := fact * x;
+    x := x - 1
+  until x = 0;
+  write fact
+else
+  c := 'c';
+  write c
+end

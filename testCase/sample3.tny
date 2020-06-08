@@ -1,14 +1,19 @@
+{重定义错误样例}
 int x;
 int fact;
-read x;
 char c;
-write y;
+real x;{x redefined}
+read x;
+write 0.2;
+write c;
 if 0 < x then
   fact := 1;
-  c = 'c';
   repeat
     fact := fact * x;
     x := x - 1
   until x = 0;
   write fact
+else
+  c := 'c';
+  write c
 end

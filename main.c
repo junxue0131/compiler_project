@@ -58,7 +58,9 @@ main( int argc, char * argv[] )
     exit(1);
   }
   listing = stdout; /* send listing to screen */
+  
   fprintf(listing,"\nTINY COMPILATION: %s\n",pgm);
+      
 #if NO_PARSE
   while (getToken()!=ENDFILE);
 #else
@@ -67,22 +69,23 @@ main( int argc, char * argv[] )
     fprintf(listing,"\nSyntax tree:\n");
     printTree(syntaxTree);
   }
-#if !NO_ANALYZE
+
+/*#if !NO_ANALYZE
   if (! Error)
   { if (TraceAnalyze) fprintf(listing,"\nBuilding Symbol Table...\n");
     buildSymtab(syntaxTree);
     if (TraceAnalyze) fprintf(listing,"\nChecking Types...\n");
     typeCheck(syntaxTree);
     if (TraceAnalyze) fprintf(listing,"\nType Checking Finished\n");
-  }
+  }*/
 
   if (! Error)
   {
     printf("Caclulate begin...\n");
-    caclulate(syntaxTree);
+    caculate(syntaxTree);
   }
 
-#endif
+/*#endif*/
 #endif
   fclose(source);
   return 0;

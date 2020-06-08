@@ -1,0 +1,26 @@
+{正确运行样例}
+int x;
+int fact;
+real y;
+char c;
+read x;
+read y;
+read c;
+write x;
+write y;
+write c;
+y := 4.5;
+x := 3;
+c := 'g';
+if 0 < x then
+  fact := 1;
+  repeat
+    fact := fact * (x + 1);
+    x := x - 1
+  until x = 0;
+  write y;
+  write fact
+else
+  c := 'c';
+  write c
+end
