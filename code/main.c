@@ -22,9 +22,6 @@
 #include "scan.h"
 #else
 #include "parse.h"
-#if !NO_ANALYZE
-#include "analyze.h"
-#endif
 #endif
 
 /* allocate global variables */
